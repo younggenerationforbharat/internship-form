@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join The Cult // Internship Application</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        display: ['Syne', 'sans-serif'],
+                        body: ['Space Grotesk', 'sans-serif'],
+                    },
+                    colors: {
+                        'acid-green': '#CCFF00',
+                        'hot-pink': '#FF00FF',
+                        'electric-blue': '#0099FF',
+                        'off-white': '#F3F3F3',
+                    },
+                    boxShadow: {
+                        'hard': '5px 5px 0px 0px #000000',
+                        'hard-hover': '2px 2px 0px 0px #000000',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #ffffff;
+            background-image: radial-gradient(#000 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        /* Marquee Animation */
+        .marquee-container {
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        .marquee-content {
+            display: inline-block;
+            animation: marquee 20s linear infinite;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* Custom Range Slider */
+        input[type=range] {
+            -webkit-appearance: none; 
+            background: transparent; 
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 24px;
+            width: 24px;
+            border: 2px solid black;
+            border-radius: 50%;
+            background: #FF00FF;
+            cursor: pointer;
+            margin-top: -10px; 
+            box-shadow: 2px 2px 0px 0px #000000;
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 4px;
+            cursor: pointer;
+            background: #000000;
+        }
+
+        /* Sticker Floating Animation */
+        .sticker {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(5deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+        
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Loading Spinner */
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border-left-color: #000;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body class="font-body text-black antialiased min-h-screen flex flex-col relative overflow-x-hidden">
+
+    <!-- Marquee Header -->
+    <div class="w-full bg-acid-green border-b-2 border-black py-3 font-display font-bold text-xl uppercase tracking-tighter sticky top-0 z-50">
+        <div class="marquee-container">
+            <div class="marquee-content">
+                WE ARE HIRING ✦ NO SUITS ALLOWED ✦ BREAK THINGS ✦ SHIP FAST ✦ WE ARE HIRING ✦ NO SUITS ALLOWED ✦ BREAK THINGS ✦ SHIP FAST ✦ WE ARE HIRING ✦ NO SUITS ALLOWED ✦ BREAK THINGS ✦ SHIP FAST ✦
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Graphic Elements (Stickers) -->
+    <div class="fixed top-32 left-10 hidden lg:block sticker z-0 pointer-events-none">
+        <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M50 0L63.39 36.61L100 50L63.39 63.39L50 100L36.61 63.39L0 50L36.61 36.61L50 0Z" fill="#FF00FF" stroke="black" stroke-width="2"/>
+        </svg>
+    </div>
+    <div class="fixed bottom-20 right-10 hidden lg:block sticker z-0 pointer-events-none" style="animation-delay: 1s;">
+        <div class="bg-electric-blue border-2 border-black p-4 transform rotate-12 font-display font-bold text-white shadow-hard">
+            APPLY NOW!
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="flex-grow flex items-center justify-center p-4 sm:p-8 z-10">
+        
+        <div class="w-full max-w-2xl bg-off-white border-2 border-black shadow-hard p-6 sm:p-10 relative">
+            
+            <!-- Header Section -->
+            <div class="mb-10 text-center">
+                <div class="inline-block bg-black text-white px-3 py-1 text-sm font-bold mb-3 transform -rotate-2">INTERNSHIP 2025</div>
+                <h1 class="font-display text-5xl sm:text-6xl font-extrabold leading-none mb-2">JOIN THE <span class="text-transparent bg-clip-text bg-gradient-to-r from-hot-pink to-electric-blue">CHAOS</span>.</h1>
+                <p class="text-lg font-medium text-gray-600">Ready to build cool sh*t? Fill this out. Don't use ChatGPT.</p>
+            </div>
+
+            <form id="applicationForm" class="space-y-8" onsubmit="handleSubmit(event)">
+                
+                <!-- Section 1: Identity -->
+                <div class="space-y-4">
+                    <h2 class="font-display text-2xl font-bold border-b-2 border-black pb-1 flex items-center gap-2">
+                        <i class="ph ph-identification-card"></i> THE BASICS
+                    </h2>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block font-bold mb-1">Name <span class="text-hot-pink">*</span></label>
+                            <input type="text" name="name" required placeholder="What do people call you?" 
+                                class="w-full bg-white border-2 border-black p-3 focus:outline-none focus:shadow-hard transition-all placeholder-gray-400">
+                        </div>
+                        <div>
+                            <label class="block font-bold mb-1">Pronouns</label>
+                            <input type="text" name="pronouns" placeholder="he/him, she/her, they/them" 
+                                class="w-full bg-white border-2 border-black p-3 focus:outline-none focus:shadow-hard transition-all placeholder-gray-400">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block font-bold mb-1">Email <span class="text-hot-pink">*</span></label>
+                        <input type="email" name="email" required placeholder="your.real.email@gmail.com" 
+                            class="w-full bg-white border-2 border-black p-3 focus:outline-none focus:shadow-hard transition-all placeholder-gray-400">
+                    </div>
+                </div>
+
+                <!-- Section 2: The Flex -->
+                <div class="space-y-4">
+                    <h2 class="font-display text-2xl font-bold border-b-2 border-black pb-1 flex items-center gap-2">
+                        <i class="ph ph-smiley-sticker"></i> VIBE CHECK
+                    </h2>
+
+                    <div>
+                        <label class="block font-bold mb-1">Tell us your lore (Bio) <span class="text-hot-pink">*</span></label>
+                        <textarea id="bioInput" name="bio" rows="3" required placeholder="Keep it short. What gets you out of bed? What's your obsession?" 
+                            class="w-full bg-white border-2 border-black p-3 focus:outline-none focus:shadow-hard transition-all placeholder-gray-400 resize-none mb-2"></textarea>
+                        
+                        <!-- AI Vibe Check Button -->
+                        <button type="button" onclick="roastMyVibe()" class="text-sm font-bold bg-black text-white px-4 py-2 hover:bg-hot-pink hover:text-white transition-colors border-2 border-black flex items-center gap-2">
+                            ✨ ROAST MY VIBE (AI)
+                        </button>
+                        
+                        <!-- AI Output Area -->
+                        <div id="vibeResult" class="hidden mt-3 bg-acid-green border-2 border-black p-4 font-bold text-sm transform rotate-1 shadow-hard">
+                            <!-- Content injected by JS -->
+                        </div>
+                    </div>
+
+                    <div class="py-2">
+                        <label class="block font-bold mb-2 flex justify-between">
+                            <span>Current Chaos Level</span>
+                            <span id="chaosValue" class="text-hot-pink">50%</span>
+                        </label>
+                        <input type="range" name="chaos" min="0" max="100" value="50" class="w-full" oninput="document.getElementById('chaosValue').innerText = this.value + '%'">
+                        <div class="flex justify-between text-xs font-bold mt-1">
+                            <span>Zen Master</span>
+                            <span>Chaos Goblin</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 3: Role Selection with AI -->
+                <div class="space-y-4">
+                    <h2 class="font-display text-2xl font-bold border-b-2 border-black pb-1 flex items-center gap-2">
+                        <i class="ph ph-lightning"></i> THE FLEX
+                    </h2>
+                    
+                    <div>
+                        <label class="block font-bold mb-1">Portfolio / Github / LinkedIn <span class="text-hot-pink">*</span></label>
+                        <input type="url" name="link" required placeholder="https://" 
+                            class="w-full bg-white border-2 border-black p-3 focus:outline-none focus:shadow-hard transition-all placeholder-gray-400">
+                        <p class="text-xs mt-1 font-bold text-gray-500">Show us what you've actually built.</p>
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between items-end mb-2">
+                            <label class="block font-bold">Which role fits your vibe? <span class="text-hot-pink">*</span></label>
+                            <button type="button" onclick="suggestRole()" class="text-xs font-bold bg-electric-blue text-white border-2 border-black px-2 py-1 hover:bg-white hover:text-black transition-colors">
+                                ✨ SORT ME (AI)
+                            </button>
+                        </div>
+                        
+                        <div class="grid grid-cols-2 gap-3">
+                            <label class="cursor-pointer relative">
+                                <input type="radio" name="role" class="peer sr-only" value="design">
+                                <div class="bg-white border-2 border-black p-3 text-center hover:bg-acid-green transition-colors peer-checked:bg-black peer-checked:text-white">
+                                    🎨 Designer
+                                </div>
+                            </label>
+                            <label class="cursor-pointer relative">
+                                <input type="radio" name="role" class="peer sr-only" value="dev">
+                                <div class="bg-white border-2 border-black p-3 text-center hover:bg-acid-green transition-colors peer-checked:bg-black peer-checked:text-white">
+                                    💻 Developer
+                                </div>
+                            </label>
+                            <label class="cursor-pointer relative">
+                                <input type="radio" name="role" class="peer sr-only" value="marketing">
+                                <div class="bg-white border-2 border-black p-3 text-center hover:bg-acid-green transition-colors peer-checked:bg-black peer-checked:text-white">
+                                    📢 Marketing
+                                </div>
+                            </label>
+                            <label class="cursor-pointer relative">
+                                <input type="radio" name="role" class="peer sr-only" value="content">
+                                <div class="bg-white border-2 border-black p-3 text-center hover:bg-acid-green transition-colors peer-checked:bg-black peer-checked:text-white">
+                                    🎬 Content
+                                </div>
+                            </label>
+                        </div>
+                        <!-- AI Role Reason -->
+                        <div id="roleReason" class="hidden mt-2 text-xs font-bold text-electric-blue"></div>
+                    </div>
+                </div>
+
+                <!-- File Upload Styled -->
+                <div>
+                    <label class="block font-bold mb-2">Upload Resume / Meme</label>
+                    <div class="relative">
+                        <input type="file" id="file-upload" accept=".pdf,.jpg,.jpeg,.png" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" onchange="updateFileName()">
+                        <div class="w-full bg-white border-2 border-dashed border-black p-6 text-center hover:bg-off-white transition-colors flex flex-col items-center justify-center gap-2">
+                            <i class="ph ph-upload-simple text-3xl"></i>
+                            <span id="file-name" class="font-bold">Drag & Drop or Click to Browse</span>
+                            <span class="text-xs text-gray-500">PDF, PNG, JPG (Max 5MB)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="w-full bg-acid-green border-2 border-black py-4 text-xl font-display font-bold uppercase hover:bg-hot-pink hover:text-white transition-all shadow-hard active:shadow-none active:translate-x-[5px] active:translate-y-[5px] group">
+                    <span class="group-hover:hidden">Send It 🚀</span>
+                    <span class="hidden group-hover:inline">Let's Cook 🔥</span>
+                </button>
+
+            </form>
+        </div>
+    </main>
+
+    <footer class="py-8 text-center font-bold text-sm relative z-10">
+        <p>© 2025 YOUR BRAND. BAD VIBES REJECTED.</p>
+    </footer>
+
+    <!-- Success Modal (Hidden by default) -->
+    <div id="successModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[100] hidden flex items-center justify-center p-4">
+        <div class="bg-white border-2 border-black shadow-hard p-8 max-w-md w-full text-center relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-2 bg-acid-green"></div>
+            <div class="absolute top-0 right-0 p-2 cursor-pointer" onclick="closeModal()">
+                <i class="ph ph-x font-bold text-xl hover:text-hot-pink"></i>
+            </div>
+            
+            <div class="text-6xl mb-4">🤘</div>
+            <h2 class="font-display text-3xl font-bold mb-2">RECEIVED!</h2>
+            <p class="mb-6 font-medium">We've got your info. If you match the vibe, we'll slide into your DMs (email) soon.</p>
+            <button onclick="closeModal()" class="bg-black text-white border-2 border-black px-6 py-2 font-bold hover:bg-transparent hover:text-black transition-colors">
+                BET.
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const apiKey = ""; // System will inject API key
+        
+        // IMPORTANT: REPLACE THIS WITH YOUR GOOGLE SCRIPT URL FROM STEP 2
+        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzFJ_1xlcGUTP9JQ3fn9_78aJTGO_45872VvADiBBVoImz6CnqHnWQK60XCyomJfkw4yg/exec"; 
+
+        // --- GEMINI API INTEGRATION ---
+        async function callGemini(prompt, isJson = false) {
+            try {
+                const payload = {
+                    contents: [{ parts: [{ text: prompt }] }]
+                };
+                
+                if (isJson) {
+                     payload.generationConfig = { 
+                        responseMimeType: "application/json"
+                     };
+                }
+
+                const response = await fetch(
+                    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`,
+                    {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    }
+                );
+
+                if (!response.ok) throw new Error('Network response was not ok');
+                const data = await response.json();
+                return data.candidates[0].content.parts[0].text;
+            } catch (error) {
+                console.error('Error calling Gemini:', error);
+                return null;
+            }
+        }
+
+        // Feature 1: Roast My Vibe
+        async function roastMyVibe() {
+            const bio = document.getElementById('bioInput').value;
+            const resultDiv = document.getElementById('vibeResult');
+            const btn = document.querySelector('button[onclick="roastMyVibe()"]');
+            
+            if (!bio.trim()) {
+                alert("Write some lore first, fam.");
+                return;
+            }
+
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<div class="spinner"></div> JUDGING YOU...';
+            btn.disabled = true;
+            resultDiv.classList.add('hidden');
+
+            const prompt = `
+                You are a brutally honest but funny Gen-Z creative director. 
+                Read this user's bio: "${bio}". 
+                1. Give them a "Vibe Score" out of 10.
+                2. Write a 1-sentence roast or hype comment using slang (no cap, bet, main character, npc, cooked, slay). 
+                Format output as: "VIBE SCORE: X/10 // [Comment]"
+            `;
+
+            const response = await callGemini(prompt);
+
+            btn.innerHTML = originalText;
+            btn.disabled = false;
+
+            if (response) {
+                resultDiv.innerText = response.trim();
+                resultDiv.classList.remove('hidden');
+            } else {
+                resultDiv.innerText = "Gemini is taking a nap. Try again.";
+                resultDiv.classList.remove('hidden');
+            }
+        }
+
+        // Feature 2: Suggest Role (Sorting Hat)
+        async function suggestRole() {
+            const bio = document.getElementById('bioInput').value;
+            const roleReasonDiv = document.getElementById('roleReason');
+            const btn = document.querySelector('button[onclick="suggestRole()"]');
+
+            if (!bio.trim()) {
+                alert("Need lore to sort you into a house.");
+                return;
+            }
+
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '🔮 THINKING...';
+            btn.disabled = true;
+            roleReasonDiv.classList.add('hidden');
+
+            const prompt = `
+                Based on this bio: "${bio}", decide which role fits best: "design", "dev", "marketing", or "content".
+                Return ONLY a JSON object with two keys:
+                {
+                    "role": "one of the 4 values above",
+                    "reason": "A funny 5-word explanation why"
+                }
+            `;
+
+            const responseText = await callGemini(prompt, true);
+
+            btn.innerHTML = originalText;
+            btn.disabled = false;
+
+            if (responseText) {
+                try {
+                    const data = JSON.parse(responseText);
+                    const radio = document.querySelector(`input[name="role"][value="${data.role}"]`);
+                    if (radio) {
+                        radio.checked = true;
+                        roleReasonDiv.innerHTML = `✨ AI says: ${data.reason}`;
+                        roleReasonDiv.classList.remove('hidden');
+                    }
+                } catch (e) {
+                    console.error("JSON Parse error", e);
+                }
+            }
+        }
+
+        // --- FORM HANDLING WITH GOOGLE DRIVE UPLOAD ---
+
+        const convertBase64 = (file) => {
+            return new Promise((resolve, reject) => {
+                const fileReader = new FileReader();
+                fileReader.readAsDataURL(file);
+                fileReader.onload = () => resolve(fileReader.result);
+                fileReader.onerror = (error) => reject(error);
+            });
+        };
+
+        function updateFileName() {
+            const input = document.getElementById('file-upload');
+            const label = document.getElementById('file-name');
+            if(input.files && input.files.length > 0) {
+                label.innerText = input.files[0].name;
+                label.classList.add('text-hot-pink');
+            } else {
+                label.innerText = "Drag & Drop or Click to Browse";
+                label.classList.remove('text-hot-pink');
+            }
+        }
+
+        async function handleSubmit(e) {
+            e.preventDefault();
+            
+            if (!GOOGLE_SCRIPT_URL) {
+                alert("Error: Google Script URL is missing. Please setup the backend script first.");
+                return;
+            }
+
+            const btn = e.target.querySelector('button[type="submit"]');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<div class="spinner"></div> UPLOADING...';
+            btn.disabled = true;
+
+            try {
+                const formData = new FormData(e.target);
+                const fileInput = document.getElementById('file-upload');
+                let base64File = "";
+                let fileName = "";
+
+                // Process File
+                if (fileInput.files.length > 0) {
+                    const file = fileInput.files[0];
+                    if (file.size > 5 * 1024 * 1024) {
+                        alert("File too big. Max 5MB.");
+                        throw new Error("File too big");
+                    }
+                    fileName = file.name;
+                    base64File = await convertBase64(file);
+                }
+
+                // Construct JSON Payload
+                const payload = {
+                    name: formData.get('name'),
+                    email: formData.get('email'),
+                    role: formData.get('role'),
+                    bio: formData.get('bio'),
+                    chaos: formData.get('chaos'),
+                    link: formData.get('link'),
+                    fileName: fileName,
+                    fileData: base64File // Base64 string of the file
+                };
+
+                // Send to Google Apps Script
+                // We use no-cors mode because standard CORS often blocks reading the response from GAS redirects
+                // This means we won't know if it failed on the server side, but it usually works if the script is correct.
+                await fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors', 
+                    headers: {
+                        'Content-Type': 'text/plain', // Use text/plain to avoid CORS preflight complications
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                // Success Animation
+                document.getElementById('successModal').classList.remove('hidden');
+                e.target.reset();
+                document.getElementById('file-name').innerText = "Drag & Drop or Click to Browse";
+                document.getElementById('chaosValue').innerText = "50%";
+                document.getElementById('vibeResult').classList.add('hidden');
+                document.getElementById('roleReason').classList.add('hidden');
+                
+            } catch (error) {
+                console.error("Submission Error:", error);
+                if (error.message !== "File too big") {
+                    alert("Something broke. Check console.");
+                }
+            } finally {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('successModal').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
